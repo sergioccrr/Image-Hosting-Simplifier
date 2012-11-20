@@ -28,6 +28,13 @@ function _header($code) {
 	header(sprintf('%s %s %s', $_SERVER['SERVER_PROTOCOL'], $code, $codes[$code]), true, $code);
 }
 
+function ext($str) {
+	$str = parse_url($str, PHP_URL_PATH);
+	$str = explode('.', $str);
+	$str = end($str);
+	return $str;
+}
+
 function cloudapp($url) {
 	$result = _get(sprintf('%s%s', 'http://cl.ly/', $url), array('Accept: application/json')); // URL hardcoded due to security reasons
 	if ($result[0] === false && $result[1] === 404) {
@@ -72,11 +79,21 @@ if ($head === false) {
 	return;
 }
 
-// ToDo: and what if this is an array instead of a string?
 if (!isset($head['Location'])) {
 	_header(500);
-	echo '<b>Error.</b> Unable to find original URL of the picture.';
+	echo '<b>Error.</b> Unable to find original URL of the file.';
 	return;
 }
 
-printf('<img src="%s" alt="Error">', $head['Location']);
+if (is_array($head['Location'])) {
+	$fileURL = $head['Location'][0];
+} else {
+	$fileURL = $head['Location'];
+}
+
+$imgs = array('png','gif','jpg');
+if (in_array(ext($fileURL), $imgs)) {
+	printf('<img src="%s" alt="Error">', $fileURL);
+} else {
+	printf('<a href="%s">%s</a>', $fileURL, $fileURL);
+}
