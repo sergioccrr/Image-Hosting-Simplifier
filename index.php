@@ -3,6 +3,7 @@
 require('includes/functions.php');
 
 $uri = $_SERVER['REQUEST_URI'];
+$uri = (isset($uri[0]) && $uri[0] == '/') ? substr($uri, 1) : $uri;
 $host = strtolower($_SERVER['HTTP_HOST']);
 
 switch ($host) {
@@ -12,6 +13,9 @@ switch ($host) {
 	case 'pics.lockerz.com':
 		$name = 'lockerz';
 		break;
+	case 'twitter.yfrog.com':
+		$name = 'yfrog';
+		break;
 	default:
 		header(403);
 		return;
@@ -19,15 +23,15 @@ switch ($host) {
 
 $ico = sprintf('statics/favicon-%s.ico', $name);
 
-if ($uri == '/favicon.ico' && file_exists($ico)) {
+if ($uri == 'favicon.ico' && file_exists($ico)) {
 	// favicon.ico (if exists)
 	header(sprintf('Location: http://%s/%s', $host, $ico));
 	return;
-} elseif ($uri == '/favicon.ico') {
+} elseif ($uri == 'favicon.ico') {
 	// favicon.ico (if not exists)
 	_header(404);
 	return;
-} elseif (empty($uri) || $uri == '/') {
+} elseif (empty($uri)) {
 	// index
 	echo 'Hey you!';
 	return;

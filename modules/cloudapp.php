@@ -2,7 +2,7 @@
 
 function loadURL($url) {
 	$get = _get(
-		sprintf('%s%s', 'http://cl.ly/', $url),
+		sprintf('http://cl.ly/%s', $url),
 		array('Accept: application/json')
 	);
 	if ($get[0] === false && $get[1] === 404) {
