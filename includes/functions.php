@@ -1,6 +1,6 @@
 <?php
 
-function _get($url, $headers=array()) {
+function do_get($url, $headers=array()) {
 	$opts = array('http'=>array('method'=>'GET'));
 	if (!empty($headers)) {
 		$tmp = implode($headers, "\r\n");

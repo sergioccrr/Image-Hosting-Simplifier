@@ -16,8 +16,11 @@ switch ($host) {
 	case 'twitter.yfrog.com':
 		$name = 'yfrog';
 		break;
+	case 'grab.by':
+		$name = 'tinygrab';
+		break;
 	default:
-		header(403);
+		_header(403);
 		return;
 }
 

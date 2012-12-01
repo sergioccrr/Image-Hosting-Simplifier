@@ -1,7 +1,7 @@
 <?php
 
 function loadURL($url) {
-	$get = _get(
+	$get = do_get(
 		sprintf('http://cl.ly/%s', $url),
 		array('Accept: application/json')
 	);

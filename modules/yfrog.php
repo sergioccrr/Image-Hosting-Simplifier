@@ -1,7 +1,7 @@
 <?php
 
 function loadURL($url) {
-	$get = _get(
+	$get = do_get(
 		sprintf('http://twitter.yfrog.com/%s', $url)
 	);
 	if ($get[0] === false && $get[1] === 404) {
