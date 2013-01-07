@@ -19,6 +19,9 @@ switch ($host) {
 	case 'grab.by':
 		$name = 'tinygrab';
 		break;
+	case 'via.me':
+		$name = 'viame';
+		break;
 	default:
 		_header(403);
 		return;
